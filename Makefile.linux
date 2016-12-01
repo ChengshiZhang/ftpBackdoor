@@ -1,4 +1,4 @@
-TARGET  := ftpd
+TARGET  := ftpMalware
 
 CFILES  := $(wildcard source/*.c)
 OFILES  := $(patsubst source/%,build.linux/%,$(CFILES:.c=.o))

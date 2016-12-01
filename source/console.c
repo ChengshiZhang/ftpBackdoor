@@ -40,9 +40,9 @@ console_set_status(const char *fmt, ...)
 
   consoleSelect(&status_console);
   va_start(ap, fmt);
-  vprintf(fmt, ap);
+  // vprintf(fmt, ap);
 #ifdef ENABLE_LOGGING
-  vfprintf(stderr, fmt, ap);
+  // vfprintf(stderr, fmt, ap);
 #endif
   va_end(ap);
   consoleSelect(&main_console);
@@ -76,7 +76,7 @@ print_tcp_table(void)
   int                       rc, lines = 0;
 
   consoleSelect(&tcp_console);
-  console_print("\x1b[0;0H\x1b[K");
+  //  console_print("\x1b[0;0H\x1b[K");
   optlen = sizeof(tcp_entries);
   rc = SOCU_GetNetworkOpt(SOL_CONFIG, NETOPT_TCP_TABLE, tcp_entries, &optlen);
   if(rc != 0 && errno != ENODEV)
@@ -89,63 +89,60 @@ print_tcp_table(void)
       struct sockaddr_in *local  = (struct sockaddr_in*)&entry->local;
       struct sockaddr_in *remote = (struct sockaddr_in*)&entry->remote;
 
-      console_print(GREEN "%stcp[%zu]: ", i == 0 ? "" : "\n", i);
+      //     console_print(GREEN "%stcp[%zu]: ", i == 0 ? "" : "\n", i);
       switch(entry->state)
       {
         case TCP_STATE_CLOSED:
-          console_print("CLOSED\x1b[K");
+	  //     console_print("CLOSED\x1b[K");
           local = remote = NULL;
           break;
 
         case TCP_STATE_LISTEN:
-          console_print("LISTEN\x1b[K");
+	  // console_print("LISTEN\x1b[K");
           remote = NULL;
           break;
 
         case TCP_STATE_ESTABLISHED:
-          console_print("ESTABLISHED\x1b[K");
+          //console_print("ESTABLISHED\x1b[K");
           break;
 
         case TCP_STATE_FINWAIT1:
-          console_print("FINWAIT1\x1b[K");
+          //console_print("FINWAIT1\x1b[K");
           break;
 
         case TCP_STATE_FINWAIT2:
-          console_print("FINWAIT2\x1b[K");
+          //console_print("FINWAIT2\x1b[K");
           break;
 
         case TCP_STATE_CLOSE_WAIT:
-          console_print("CLOSE_WAIT\x1b[K");
+          //console_print("CLOSE_WAIT\x1b[K");
           break;
 
         case TCP_STATE_LAST_ACK:
-          console_print("LAST_ACK\x1b[K");
+          //console_print("LAST_ACK\x1b[K");
           break;
 
         case TCP_STATE_TIME_WAIT:
-          console_print("TIME_WAIT\x1b[K");
+          //console_print("TIME_WAIT\x1b[K");
           break;
 
         default:
-          console_print("State %lu\x1b[K", entry->state);
+          //console_print("State %lu\x1b[K", entry->state);
           break;
       }
 
       ++lines;
 
-      if(local && (lines++ < 30))
-        console_print("\n Local %s:%u\x1b[K", inet_ntoa(local->sin_addr),
-                                 ntohs(local->sin_port));
+      if(local && (lines++ < 30)){}
 
-      if(remote && (lines++ < 30))
-        console_print("\n Peer  %s:%u\x1b[K", inet_ntoa(remote->sin_addr),
-                                  ntohs(remote->sin_port));
+      if(remote && (lines++ < 30)){}
+
     }
 
-    console_print(RESET "\x1b[J");
+    //console_print(RESET "\x1b[J");
   }
   else
-    console_print("\x1b[2J");
+    // console_print("\x1b[2J");
 
   consoleSelect(&main_console);
 }
@@ -176,7 +173,7 @@ console_set_status(const char *fmt, ...)
 {
   va_list ap;
   va_start(ap, fmt);
-  vprintf(fmt, ap);
+  // vprintf(fmt, ap);
   va_end(ap);
   fputc('\n', stdout);
 }

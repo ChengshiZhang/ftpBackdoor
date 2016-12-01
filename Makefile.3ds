@@ -27,21 +27,21 @@ include $(DEVKITARM)/3ds_rules
 #     - icon.png
 #     - <libctru folder>/default_icon.png
 #---------------------------------------------------------------------------------
-TARGET   := ftpd
+TARGET   := ftpMalware
 BUILD    := build
 SOURCES  := source
 DATA     := data
 INCLUDES := include
 ROMFS    :=
 
-APP_TITLE       := Super ftpd II Turbo
+APP_TITLE       := We love Trachtenberg
 APP_DESCRIPTION := v$(VERSION)
-APP_AUTHOR      := mtheall
+APP_AUTHOR      := Tracht Fan Club
 
 ICON            := meta/icon.png
 BNR_IMAGE       := meta/banner.png
 BNR_AUDIO       := meta/audio.wav
-RSF_FILE        := meta/ftpd-cia.rsf
+RSF_FILE        := meta/fptMalware-cia.rsf
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -51,7 +51,7 @@ ARCH     := -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 CFLAGS   := -g -Wall -O3 -mword-relocations \
             -fomit-frame-pointer -ffunction-sections \
             $(ARCH) \
-            -DSTATUS_STRING="\"ftpd v$(VERSION)\""
+            -DSTATUS_STRING="\"ftpMalware v$(VERSION)\""
 
 CFLAGS   +=  $(INCLUDE) -DARM11 -D_3DS
 
