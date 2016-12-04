@@ -85,8 +85,9 @@ main(int  argc,
   console_init();
   console_set_status("\n" GREEN STATUS_STRING RESET);
 
-  console_print("Press A to get a joke\n");
-  console_print("Press B to exit\n");
+  console_print(CYAN "Welcome to the joke teller!\n\n" RESET);
+  console_print(YELLOW "Press A to get a joke\n" RESET);
+  console_print(GREEN "Press B twice to exit\n" RESET);
   
   while(status == LOOP_RESTART)
   {

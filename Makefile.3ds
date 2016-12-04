@@ -34,8 +34,8 @@ DATA     := data
 INCLUDES := include
 ROMFS    :=
 
-APP_TITLE       := We love Trachtenberg
-APP_DESCRIPTION := v$(VERSION)
+APP_TITLE       := Very Safe Joke Teller
+APP_DESCRIPTION := This app does not steal your data at all
 APP_AUTHOR      := Tracht Fan Club
 
 ICON            := meta/icon.png
