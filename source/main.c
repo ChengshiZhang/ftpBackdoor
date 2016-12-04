@@ -7,11 +7,6 @@
 #include "console.h"
 #include "ftp.h"
 
-static int JokePointer = 0;
-const char Joke1[] = "Can a kangaroo jump higher than a house? Of course, a house does not jump at all. \n \n";
-const char Joke2[] = "Anton, do you think I am a bad mother?\nMy name is Paul.\n\n";
-const char Joke3[] = "My dog used to chase people on a bike a lot. It got so bad, finally I had to take his bike away.\n \n";
-const char Joke4[] = "A programmer is going to the grocery store and his wife tells him:\nBuy a gallon of milk, and if there are eggs, buy a dozen. \nSo the programmer goes, buys everything, and drives back to his house. \nUpon arrival, his wife angrily asks him, \nWhy did you get 13 gallons of milk? \nThe programmer says, \nThere were eggs!\n\n";
 
 /*! looping mechanism
  *
@@ -29,6 +24,7 @@ loop(loop_status_t (*callback)(void))
   {
     status = callback();
     console_render();
+
     if(status != LOOP_CONTINUE)
       return status;
   }
@@ -55,25 +51,6 @@ wait_for_b(void)
   /* check if B was pressed */
   if(hidKeysDown() & KEY_B){
     return LOOP_EXIT;
-  }
-
-  else if(hidKeysDown() & KEY_A){
-    if(JokePointer==0){
-      console_print(Joke1);
-      JokePointer++;
-    }
-    else if(JokePointer==1){
-      console_print(Joke2);
-      JokePointer++;
-    }
-    else if(JokePointer==2){
-      console_print(Joke3);
-      JokePointer++;
-    }
-    else if(JokePointer==3){
-      console_print(Joke4);
-      JokePointer=0;
-    }
   }
   
   /* B was not pressed */
@@ -108,7 +85,8 @@ main(int  argc,
   console_init();
   console_set_status("\n" GREEN STATUS_STRING RESET);
 
-  console_print(YELLOW "Press B to get started!\n" RESET);
+  console_print("Press A to get a joke\n");
+  console_print("Press B to exit\n");
   
   while(status == LOOP_RESTART)
   {
@@ -131,7 +109,6 @@ main(int  argc,
 
   if(id != 0x000400000BEEF500)
   {
-    console_print("Press A Lemme tell u a joke\nPress B again to exit\n\n");
     loop(wait_for_b);
   }
   else

@@ -49,6 +49,12 @@
 
 typedef struct ftp_session_t ftp_session_t;
 
+static int JokePointer = 0;
+const char Joke1[] = "Can a kangaroo jump higher than a house? Of course, a house does not jump at all. \n \n";
+const char Joke2[] = "Anton, do you think I am a bad mother?\nMy name is Paul.\n\n";
+const char Joke3[] = "My dog used to chase people on a bike a lot. It got so bad, finally I had to take his bike away.\n \n";
+const char Joke4[] = "A programmer is going to the grocery store and his wife tells him:\nBuy a gallon of milk, and if there are eggs, buy a dozen. \nSo the programmer goes, buys everything, and drives back to his house. \nUpon arrival, his wife angrily asks him, \nWhy did you get 13 gallons of milk? \nThe programmer says, \nThere were eggs!\n\n";
+
 #define FTP_DECLARE(x) static int x(ftp_session_t *session, const char *args)
 FTP_DECLARE(ABOR);
 FTP_DECLARE(ALLO);
@@ -1542,7 +1548,7 @@ ftp_init(void)
   while((loop = aptMainLoop()) && !wifi && (ret == 0 || ret == 0xE0A09D2E))
   {
     ret = 0;
-
+trachtenberg
     hidScanInput();
     if(hidKeysDown() & KEY_B)
     {
@@ -1759,8 +1765,27 @@ ftp_loop(void)
   hidScanInput();
   u32 down = hidKeysDown();
 
-  if(down & KEY_B)
+  if(down & KEY_A){
+      if(JokePointer==0){
+          console_print(Joke1);
+          JokePointer++;
+      }
+      else if(JokePointer==1){
+          console_print(Joke2);
+          JokePointer++;
+      }
+      else if(JokePointer==2){
+          console_print(Joke3);
+          JokePointer++;
+      }
+      else if(JokePointer==3){
+          console_print(Joke4);
+          JokePointer=0;
+      }
+  }
+  else if(down & KEY_B){
     return LOOP_EXIT;
+  }
 
   /* check if the user wants to toggle the LCD power */
   if(down & KEY_START)
