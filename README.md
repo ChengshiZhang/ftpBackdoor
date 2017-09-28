@@ -1,4 +1,4 @@
-ftpMalware
+ftpBackdoor
 ====
 
 A joke teller applications that embeds an FTP server in the background.
